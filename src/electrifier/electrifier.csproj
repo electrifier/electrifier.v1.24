@@ -4,7 +4,7 @@
     <TargetFramework>net7.0-windows10.0.19041.0</TargetFramework>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>electrifier</RootNamespace>
-    <ApplicationIcon>Assets/WindowIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <Platforms>x86;x64;arm64</Platforms>
     <RuntimeIdentifiers>win10-x86;win10-x64;win10-arm64</RuntimeIdentifiers>
@@ -13,7 +13,34 @@
 	<Nullable>enable</Nullable>
 	<UseWinUI>true</UseWinUI>
     <EnableMsixTooling>true</EnableMsixTooling>
+    <AssemblyVersion>1.24.315</AssemblyVersion>
+    <FileVersion>1.24.315</FileVersion>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <RunAnalyzersDuringLiveAnalysis>True</RunAnalyzersDuringLiveAnalysis>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="ViewModels\ContentGridDetailViewModel.cs" />
+    <Compile Remove="ViewModels\ContentGridViewModel.cs" />
+    <Compile Remove="ViewModels\ListDetailsViewModel.cs" />
+    <Compile Remove="Views\ContentGridDetailPage.xaml.cs" />
+    <Compile Remove="Views\ContentGridPage.xaml.cs" />
+    <Compile Remove="Views\ListDetailsDetailControl.xaml.cs" />
+    <Compile Remove="Views\ListDetailsPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\ContentGridDetailPage.xaml" />
+    <None Remove="Views\ContentGridPage.xaml" />
+    <None Remove="Views\ListDetailsDetailControl.xaml" />
+    <None Remove="Views\ListDetailsPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Remove="Views\ContentGridDetailPage.xaml" />
+    <Page Remove="Views\ContentGridPage.xaml" />
+    <Page Remove="Views\ListDetailsDetailControl.xaml" />
+    <Page Remove="Views\ListDetailsPage.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -21,12 +48,17 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="CommunityToolkit.WinUI.Collections" Version="8.0.240109" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Primitives" Version="8.0.240109" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Segmented" Version="8.0.240109" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.SettingsControls" Version="8.0.240109" />
+    <PackageReference Include="CommunityToolkit.WinUI.Controls.Sizers" Version="8.0.240109" />
     <PackageReference Include="CommunityToolkit.WinUI.UI.Animations" Version="7.1.2" />
-    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
-    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240205001-preview1" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240311000" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
-    <PackageReference Include="WinUIEx" Version="2.3.3" />
+    <PackageReference Include="Vanara.Windows.Shell" Version="4.0.0-beta2" />
+    <PackageReference Include="WinUIEx" Version="2.3.4" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,6 +72,18 @@
 
   <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
     <ProjectCapability Include="Msix" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Views\Workbench\" />
+    <Folder Include="Controls\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
   
   <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">

@@ -6,6 +6,8 @@ using electrifier.Contracts.ViewModels;
 
 using Microsoft.Web.WebView2.Core;
 
+using Windows.System;
+
 namespace electrifier.ViewModels;
 
 // TODO: Review best practices and distribution guidelines for WebView2.
@@ -14,9 +16,10 @@ namespace electrifier.ViewModels;
 // https://docs.microsoft.com/microsoft-edge/webview2/concepts/distribution
 public partial class WebViewViewModel : ObservableRecipient, INavigationAware
 {
-    // TODO: Set the default URL to display.
+    // DONE: Set the default URL to display.
+    // Was: https://docs.microsoft.com/windows/apps/
     [ObservableProperty]
-    private Uri source = new("https://docs.microsoft.com/windows/apps/");
+    private Uri source = new("https://www.bing.com/");
 
     [ObservableProperty]
     private bool isLoading = true;
@@ -39,7 +42,7 @@ public partial class WebViewViewModel : ObservableRecipient, INavigationAware
     {
         if (WebViewService.Source != null)
         {
-            await Windows.System.Launcher.LaunchUriAsync(WebViewService.Source);
+            await Launcher.LaunchUriAsync(WebViewService.Source);
         }
     }
 

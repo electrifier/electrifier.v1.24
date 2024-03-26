@@ -1,5 +1,4 @@
 ﻿using electrifier.ViewModels;
-
 using Microsoft.UI.Xaml.Controls;
 
 namespace electrifier.Views;

@@ -19,4 +19,6 @@ public interface INavigationViewService
     void UnregisterEvents();
 
     NavigationViewItem? GetSelectedItem(Type pageType);
+
+    bool TryGetSelectedItem(Type sourcePageType, out object? selectedItem);
 }

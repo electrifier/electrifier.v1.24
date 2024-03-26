@@ -1,13 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using CommunityToolkit.WinUI.UI.Animations;
-
+﻿using CommunityToolkit.WinUI.UI.Animations;
 using electrifier.Contracts.Services;
 using electrifier.Contracts.ViewModels;
 using electrifier.Helpers;
-
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
+using System.Diagnostics.CodeAnalysis;
 
 namespace electrifier.Services;
 
@@ -83,6 +80,13 @@ public class NavigationService : INavigationService
         return false;
     }
 
+    /// <summary>
+    /// Navigates to the page with the given key.
+    /// </summary>
+    /// <param name="pageKey"></param>
+    /// <param name="parameter"></param>
+    /// <param name="clearNavigation"></param>
+    /// <returns></returns>
     public bool NavigateTo(string pageKey, object? parameter = null, bool clearNavigation = false)
     {
         var pageType = _pageService.GetPageType(pageKey);

@@ -1,9 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-
 using electrifier.Contracts.Services;
 using electrifier.ViewModels;
 using electrifier.Views;
-
 using Microsoft.UI.Xaml.Controls;
 
 namespace electrifier.Services;
@@ -16,10 +14,8 @@ public class PageService : IPageService
     {
         Configure<WorkbenchViewModel, WorkbenchPage>();
         Configure<WebViewViewModel, WebViewPage>();
-        Configure<ContentGridViewModel, ContentGridPage>();
-        Configure<ContentGridDetailViewModel, ContentGridDetailPage>();
-        Configure<ListDetailsViewModel, ListDetailsPage>();
         Configure<SettingsViewModel, SettingsPage>();
+        Configure<FileManagerViewModel, FileManagerPage>();
     }
 
     public Type GetPageType(string key)

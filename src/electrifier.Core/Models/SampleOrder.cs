@@ -1,6 +1,6 @@
 ﻿namespace electrifier.Core.Models;
 
-// Model for the SampleDataService. Replace with your own model.
+[Obsolete("This class is for demonstration purposes only.")]
 public class SampleOrder
 {
     public long OrderID

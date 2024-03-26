@@ -1,10 +1,11 @@
 ﻿using electrifier.Contracts.Services;
 using electrifier.Helpers;
-
 using Microsoft.UI.Xaml;
+using System.Diagnostics;
 
 namespace electrifier.Services;
 
+[DebuggerDisplay($"{{{nameof(GetDebuggerDisplay)}(),nq}}")]
 public class ThemeSelectorService : IThemeSelectorService
 {
     private const string SettingsKey = "AppBackgroundRequestedTheme";
@@ -32,18 +33,6 @@ public class ThemeSelectorService : IThemeSelectorService
         await SaveThemeInSettingsAsync(Theme);
     }
 
-    public async Task SetRequestedThemeAsync()
-    {
-        if (App.MainWindow.Content is FrameworkElement rootElement)
-        {
-            rootElement.RequestedTheme = Theme;
-
-            TitleBarHelper.UpdateTitleBar(Theme);
-        }
-
-        await Task.CompletedTask;
-    }
-
     private async Task<ElementTheme> LoadThemeFromSettingsAsync()
     {
         var themeName = await _localSettingsService.ReadSettingAsync<string>(SettingsKey);
@@ -56,8 +45,24 @@ public class ThemeSelectorService : IThemeSelectorService
         return ElementTheme.Default;
     }
 
+    public async Task SetRequestedThemeAsync()
+    {
+        if (App.MainWindow.Content is FrameworkElement rootElement)
+        {
+            rootElement.RequestedTheme = Theme;
+
+            TitleBarHelper.UpdateTitleBar(Theme);
+        }
+
+        await Task.CompletedTask;
+    }
+
     private async Task SaveThemeInSettingsAsync(ElementTheme theme)
     {
         await _localSettingsService.SaveSettingAsync(SettingsKey, theme.ToString());
     }
+
+#pragma warning disable CS8603 // Possible null reference return.
+    private string GetDebuggerDisplay() => ToString();
+#pragma warning restore CS8603 // Possible null reference return.
 }

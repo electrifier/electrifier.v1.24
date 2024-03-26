@@ -6,10 +6,11 @@ using Windows.Storage.Streams;
 namespace electrifier.Helpers;
 
 // Use these extension methods to store and retrieve local and roaming app data
-// More details regarding storing and retrieving app data at https://docs.microsoft.com/windows/apps/design/app-settings/store-and-retrieve-app-data
+// More details regarding storing and retrieving app data at
+// https://docs.microsoft.com/windows/apps/design/app-m_Settings/store-and-retrieve-app-data
 public static class SettingsStorageExtensions
 {
-    private const string FileExtension = ".json";
+    private const string FileExtension = """.json""";
 
     public static bool IsRoamingStorageAvailable(this ApplicationData appData)
     {
@@ -26,7 +27,8 @@ public static class SettingsStorageExtensions
 
     public static async Task<T?> ReadAsync<T>(this StorageFolder folder, string name)
     {
-        if (!File.Exists(Path.Combine(folder.Path, GetFileName(name))))
+        var filePath = Path.Combine(folder.Path, GetFileName(name));
+        if (!File.Exists(filePath))
         {
             return default;
         }

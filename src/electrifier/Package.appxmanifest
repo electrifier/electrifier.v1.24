@@ -8,12 +8,15 @@
   xmlns:genTemplate="http://schemas.microsoft.com/appx/developer/templatestudio"
   xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
   xmlns:desktop="http://schemas.microsoft.com/appx/manifest/desktop/windows10"
-  IgnorableNamespaces="uap rescap genTemplate">
+  xmlns:uap2="http://schemas.microsoft.com/appx/manifest/uap/windows10/2"
+  xmlns:iot="http://schemas.microsoft.com/appx/manifest/iot/windows10"
+  xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+  IgnorableNamespaces="uap rescap genTemplate uap2 iot uap3">
 
   <Identity
     Name="110d64de-2f36-46a7-816c-1f138a578b9d"
     Publisher="CN=electrifier.org"
-    Version="1.24.2.0" />
+    Version="1.24.325.0" />
     
   <mp:PhoneIdentity PhoneProductId="110d64de-2f36-46a7-816c-1f138a578b9d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
     
@@ -37,8 +40,8 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="$targetentrypoint$">
       <uap:VisualElements
-        DisplayName="ms-resource:AppDisplayName"
-        Description="ms-resource:AppDescription"
+        DisplayName="electrifier alpha"
+        Description="electrifier alpha 4 Windows, build v1.24.325"
         BackgroundColor="transparent"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png">
@@ -63,6 +66,18 @@
 
   <Capabilities>
     <rescap:Capability Name="runFullTrust" />
+    <Capability Name="internetClient"/>
+    <uap:Capability Name="musicLibrary"/>
+    <uap:Capability Name="objects3D"/>
+    <uap:Capability Name="phoneCall"/>
+    <uap:Capability Name="picturesLibrary"/>
+    <uap2:Capability Name="phoneCallHistoryPublic"/>
+    <Capability Name="privateNetworkClientServer"/>
+    <uap:Capability Name="removableStorage"/>
+    <iot:Capability Name="systemManagement"/>
+    <uap:Capability Name="userAccountInformation"/>
+    <uap3:Capability Name="userNotificationListener"/>
+    <uap:Capability Name="videosLibrary"/>
   </Capabilities>
 
   <genTemplate:Metadata>

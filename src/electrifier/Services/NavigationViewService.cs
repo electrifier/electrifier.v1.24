@@ -1,10 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-using electrifier.Contracts.Services;
+﻿using electrifier.Contracts.Services;
 using electrifier.Helpers;
 using electrifier.ViewModels;
-
 using Microsoft.UI.Xaml.Controls;
+using System.Diagnostics.CodeAnalysis;
 
 namespace electrifier.Services;
 
@@ -15,10 +13,13 @@ public class NavigationViewService : INavigationViewService
     private readonly IPageService _pageService;
 
     private NavigationView? _navigationView;
+    public object? FooterMenuItems => _navigationView?.FooterMenuItems;
 
     public IList<object>? MenuItems => _navigationView?.MenuItems;
 
     public object? SettingsItem => _navigationView?.SettingsItem;
+    
+    //public object? WorkbenchItem => _navigationView?.WorkbenchItem;
 
     public NavigationViewService(INavigationService navigationService, IPageService pageService)
     {
@@ -53,22 +54,45 @@ public class NavigationViewService : INavigationViewService
         return null;
     }
 
+    bool INavigationViewService.TryGetSelectedItem(Type sourcePageType, [NotNullWhen(true)] out object? selectedItem)
+    {
+        selectedItem = GetSelectedItem(sourcePageType);
+        return selectedItem != null;
+    }
+
     private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args) => _navigationService.GoBack();
 
+    /// <summary>
+    /// OnItemInvoked is called when a NavigationViewItem is clicked or tapped.
+    /// <list type="bullet">
+    /// If SettingsItem is invoked, navigate to <see cref="SettingsViewModel"/>
+    /// </list>
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="args"></param>
     private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
     {
         if (args.IsSettingsInvoked)
         {
             _navigationService.NavigateTo(typeof(SettingsViewModel).FullName!);
-        }
-        else
-        {
-            var selectedItem = args.InvokedItemContainer as NavigationViewItem;
 
-            if (selectedItem?.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
-            {
-                _navigationService.NavigateTo(pageKey);
-            }
+            return;
+        }
+
+        // Get the page type before navigation so you can prevent duplicate entries in the backstack
+        var selectedItem = args.InvokedItemContainer as NavigationViewItem;
+        // TODO: var selectedType = selectedItem?.GetType();
+
+        // WorkbenchViewModel
+        if (selectedItem?.GetValue(NavigationHelper.NavigateToProperty) is string selectedItemPageKey)
+        {
+            _navigationService.NavigateTo(selectedItemPageKey);
+        }
+
+        // doc: https://docs.microsoft.com/en-us/windows/apps/design/controls/navigationview#navigationview-and-the-back-button
+        if (selectedItem?.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
+        {
+            _navigationService.NavigateTo(pageKey);
         }
     }
 
@@ -90,7 +114,7 @@ public class NavigationViewService : INavigationViewService
 
         return null;
     }
-
+    
     private bool IsMenuItemForPageType(NavigationViewItem menuItem, Type sourcePageType)
     {
         if (menuItem.GetValue(NavigationHelper.NavigateToProperty) is string pageKey)
