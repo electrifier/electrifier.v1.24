@@ -25,6 +25,9 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/electrifier</RepositoryUrl>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Controls\Vanara.WinUI.Forms\ExplorerBrowser.xaml" />
+  </ItemGroup>
 
   <ItemGroup>
     <Manifest Include="$(ApplicationManifest)" />
@@ -42,7 +45,10 @@
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.0" />
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.5.240404000" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
+    <PackageReference Include="Vanara.Windows.Extensions" Version="4.0.1" />
+    <PackageReference Include="Vanara.Windows.Forms" Version="4.0.1" />
     <PackageReference Include="Vanara.Windows.Shell" Version="4.0.1" />
+    <PackageReference Include="Vanara.Windows.Shell.Common" Version="4.0.1" />
     <PackageReference Include="WinUIEdit" Version="0.0.3-prerelease" />
     <PackageReference Include="WinUIEx" Version="2.3.4" />
   </ItemGroup>
@@ -54,6 +60,9 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <Page Update="Controls\Vanara.WinUI.Forms\ExplorerBrowser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <None Update="README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
@@ -67,7 +76,6 @@
   <ItemGroup>
     <Folder Include="Assets\Themes\Aero Blackcomb\" />
     <Folder Include="Assets\Views\Workbench\" />
-    <Folder Include="Controls\" />
   </ItemGroup>
 
   <ItemGroup>

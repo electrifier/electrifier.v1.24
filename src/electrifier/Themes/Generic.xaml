@@ -1,0 +1,17 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:vanarawinuiforms="using:electrifier.Controls.Vanara.WinUI.Forms">
+
+    <Style TargetType="vanarawinuiforms:ExplorerBrowser">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="vanarawinuiforms:ExplorerBrowser">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
