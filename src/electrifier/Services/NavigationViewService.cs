@@ -98,8 +98,8 @@ public class NavigationViewService : INavigationViewService
 
         // Get the page type before navigation so you can prevent duplicate entries in the back stack
         var selectedItem = args.InvokedItemContainer as NavigationViewItem;
-        var selectedType = selectedItem?.GetType();
-        var pageKey = args.InvokedItemContainer.GetValue(NavigationHelper.NavigateToProperty) as string;
+        //var selectedType = selectedItem?.GetType();
+        //var pageKey = args.InvokedItemContainer.GetValue(NavigationHelper.NavigateToProperty) as string;
         // TODO: var selectedType = selectedItem?.GetType();
         // TODO: var pageKey = args.InvokedItemContainer.GetValue(NavigationHelper.NavigateToProperty) as string;
 

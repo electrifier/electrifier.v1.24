@@ -77,7 +77,7 @@ public sealed partial class MainWindow : WindowEx
     {
         if (args.DidPresenterChange)
         {
-            object AppTitleBar = null;
+            //object AppTitleBar = null;
 
             switch (sender.Presenter.Kind)
             {

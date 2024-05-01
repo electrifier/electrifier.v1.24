@@ -150,7 +150,7 @@ internal interface IWinUIExplorerBrowser
 
             ShellItem shellItem = Locations[index];
             pendingNavigation = new PendingNavigation(shellItem, index);
-            // TODO:           parent?.Navigate(shellItem);
+            parent.NavigateTo(shellItem);
             return true;
         IL_002f:
             return false;
