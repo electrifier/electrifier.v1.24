@@ -21,6 +21,7 @@ using static Vanara.PInvoke.Shell32;
 using Vanara.Collections;
 using System.Collections;
 using System.Runtime.InteropServices;
+using static electrifier.Controls.Vanara.WinUI.Forms.IWinUIExplorerBrowser;
 
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
@@ -40,20 +41,34 @@ public partial class ExplorerBrowser : UserControl, IWinUIExplorerBrowser
     {
         get;
     }
-    private IWinUIExplorerBrowser.ShellItemCollection Items
+    private ShellItemCollection Items
     {
         get;
     }
-    private IWinUIExplorerBrowser.ShellItemCollection SelectedItems
+    private ShellItemCollection GridViewItems
     {
         get;
     }
+    private ShellItemCollection TreeViewItems
+    {
+        get;
+    }
+
     public ExplorerBrowser()
     {
         InitializeComponent();
 
-        History = new IWinUIExplorerBrowser.NavigationLog((IWinUIExplorerBrowser)this);
-        Items = new IWinUIExplorerBrowser.ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
-        SelectedItems = new IWinUIExplorerBrowser.ShellItemCollection(this, SVGIO.SVGIO_SELECTION);
+        History = new IWinUIExplorerBrowser.NavigationLog(this);
+        Items = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
+        GridViewItems = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
+        TreeViewItems = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
+
+        // Add items to TreeViewItems and GridViewItems
+        //TreeViewItems.Add(new ShellItem(KNOWNFOLDERID.FOLDERID_Desktop));
+    }
+
+    private ShellItemCollection GetItemsArray(SVGIO option)
+    {
+        return Items;
     }
 }

@@ -112,8 +112,8 @@ internal interface IWinUIExplorerBrowser
         {
             if (Locations.Count != 0)
             {
-                bool canNavigateBackward = CanNavigateBackward;
-                bool canNavigateForward = CanNavigateForward;
+                var canNavigateBackward = CanNavigateBackward;
+                var canNavigateForward = CanNavigateForward;
                 Locations.Clear();
                 CurrentLocationIndex = -1;
                 NavigationLogEventArgs e = new NavigationLogEventArgs
@@ -177,8 +177,8 @@ internal interface IWinUIExplorerBrowser
         private void OnNavigated(object? sender, NavigatedEventArgs args)
         {
             NavigationLogEventArgs navigationLogEventArgs = new NavigationLogEventArgs();
-            bool canNavigateBackward = CanNavigateBackward;
-            bool canNavigateForward = CanNavigateForward;
+            var canNavigateBackward = CanNavigateBackward;
+            var canNavigateForward = CanNavigateForward;
             if (pendingNavigation != null)
             {
                 if (pendingNavigation.Location.IShellItem.Compare(args.NewLocation?.IShellItem, Shell32.SICHINTF.SICHINT_ALLFIELDS) != 0)
@@ -188,7 +188,7 @@ internal interface IWinUIExplorerBrowser
                         Locations.RemoveRange(CurrentLocationIndex + 1, Locations.Count - (CurrentLocationIndex + 1));
                     }
 
-                    if ((object)args.NewLocation != null)
+                    if (args.NewLocation != null)
                     {
                         Locations.Add(args.NewLocation);
                     }
@@ -211,7 +211,7 @@ internal interface IWinUIExplorerBrowser
                     Locations.RemoveRange(CurrentLocationIndex + 1, Locations.Count - (CurrentLocationIndex + 1));
                 }
 
-                if ((object)args.NewLocation != null)
+                if (args.NewLocation != null)
                 {
                     Locations.Add(args.NewLocation);
                 }
@@ -234,44 +234,35 @@ internal interface IWinUIExplorerBrowser
     /// <summary>Represents a collection of <see cref="ShellItem"/> attached to an <see cref="ExplorerBrowser"/>.</summary>
     internal class ShellItemCollection : IReadOnlyList<ShellItem>
     {
-        private readonly ExplorerBrowser eb;
+        private readonly IWinUIExplorerBrowser eb;
         private readonly SVGIO option;
         private readonly IEnumerable<IShellItem> items;
 
-        internal ShellItemCollection(ExplorerBrowser eb, SVGIO opt)
+        internal ShellItemCollection(IWinUIExplorerBrowser eb, SVGIO opt)
         {
             this.eb = eb;
             option = opt;
-            items = Enumerable.Empty<IShellItem>();
+            //items = (IEnumerable<IShellItem>?)eb.GetItemsArray(option);
+            items = new List<IShellItem>();
+            //items.add(new ShellItem(KNOWNFOLDERID.FOLDERID_Desktop));
         }
 
         /// <summary>Gets the number of elements in the collection.</summary>
         /// <value>Returns a <see cref="int"/> value.</value>
-        public int Count
-        {
-            get
-            {
-                return Items.Count();
-            }
-        }
+        public int Count => items.Count();
 
-        private IEnumerable<IShellItem> Items
-        {
-            get
-            {
-                return Enumerable.Empty<IShellItem>();
-                //var array = eb.GetItemsArray(option);
-                //try
-                //{
-                //    return array is null ? Enumerable.Empty<IShellItem>() : array;
-                //}
-                //finally
-                //{
-                //    if (array != null)
-                //        Marshal.ReleaseComObject(array);
-                //}
-            }
-        }
+        private IEnumerable<IShellItem> Items => items;
+//        {
+//            get
+//            {
+//                return items;
+//                //var array = eb.GetItemsArray(option);
+//                //try
+//                //{
+//                //    return array is null ? Enumerable.Empty<IShellItem>() : array;
+//                //}
+//            }
+//        }
 
         /// <summary>Gets the <see cref="ShellItem"/> at the specified index.</summary>
         /// <value>The <see cref="ShellItem"/>.</value>
@@ -305,18 +296,6 @@ internal interface IWinUIExplorerBrowser
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    }
-
-    private ShellItemCollection Items => throw new NotImplementedException();
-
-    private ShellItemCollection GetItemsArray(SVGIO option)
-    {
-        //if (Items is null)
-        //{
-        //    Items;
-        //}
-
-        return Items;
     }
 
     /// <summary>The event argument for NavigationLogChangedEvent</summary>
