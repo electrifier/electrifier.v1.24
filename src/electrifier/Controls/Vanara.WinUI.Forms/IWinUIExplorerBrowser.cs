@@ -232,46 +232,43 @@ internal interface IWinUIExplorerBrowser
     }
 
     /// <summary>Represents a collection of <see cref="ShellItem"/> attached to an <see cref="ExplorerBrowser"/>.</summary>
-    internal class ShellItemCollection : IReadOnlyList<ShellItem>
+    public class ShellItemCollection : IReadOnlyList<ShellItem>
     {
         private readonly IWinUIExplorerBrowser eb;
         private readonly SVGIO option;
-        private readonly IEnumerable<IShellItem> items;
+        private readonly List<ShellItem> items;
 
         internal ShellItemCollection(IWinUIExplorerBrowser eb, SVGIO opt)
         {
             this.eb = eb;
             option = opt;
-            //items = (IEnumerable<IShellItem>?)eb.GetItemsArray(option);
-            items = new List<IShellItem>();
-            //items.add(new ShellItem(KNOWNFOLDERID.FOLDERID_Desktop));
+
+            items = new List<ShellItem>();
+            //items = eb.GetItemsArray(option);
+            // new List<IShellItem>() => eb.GetItemsArray(option);
         }
 
         /// <summary>Gets the number of elements in the collection.</summary>
         /// <value>Returns a <see cref="int"/> value.</value>
         public int Count => items.Count();
 
-        private IEnumerable<IShellItem> Items => items;
-//        {
-//            get
-//            {
+        private List<ShellItem> /*ShellItemCollection */ Items => items;
 //                return items;
 //                //var array = eb.GetItemsArray(option);
 //                //try
 //                //{
 //                //    return array is null ? Enumerable.Empty<IShellItem>() : array;
 //                //}
-//            }
-//        }
 
         /// <summary>Gets the <see cref="ShellItem"/> at the specified index.</summary>
         /// <value>The <see cref="ShellItem"/>.</value>
         /// <param name="index">The zero-based index of the element to get.</param>
-        public ShellItem this[int index]
+        public ShellItem? /* TODO: Remove nullable */ this[int index]
         {
             get
             {
-                return ShellItem.Open(Items.ElementAt(index));
+                return null; 
+                //  //return ShellItem.Open(Items.ElementAt(index));
                 //var array = Items;
                 //try
                 //{
@@ -291,7 +288,9 @@ internal interface IWinUIExplorerBrowser
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        public IEnumerator<ShellItem> GetEnumerator() => Items.Select(ShellItem.Open).GetEnumerator();
+        public IEnumerator<ShellItem> GetEnumerator()
+            //=> Items.Select(ShellItem.Open).GetEnumerator();
+            => items.GetEnumerator();
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>

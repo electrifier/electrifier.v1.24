@@ -67,8 +67,8 @@ public partial class ExplorerBrowser : UserControl, IWinUIExplorerBrowser
         //TreeViewItems.Add(new ShellItem(KNOWNFOLDERID.FOLDERID_Desktop));
     }
 
-    private ShellItemCollection GetItemsArray(SVGIO option)
-    {
-        return Items;
-    }
+    //private ShellItemCollection GetItemsArray(SVGIO option)
+    //{
+    //    return Items;
+    //}
 }
