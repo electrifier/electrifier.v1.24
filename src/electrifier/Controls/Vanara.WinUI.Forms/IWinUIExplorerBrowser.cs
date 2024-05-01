@@ -320,26 +320,16 @@ internal interface IWinUIExplorerBrowser
         /// <summary>Gets the <see cref="ShellItem"/> at the specified index.</summary>
         /// <value>The <see cref="ShellItem"/>.</value>
         /// <param name="index">The zero-based index of the element to get.</param>
-        public ShellItem? /* TODO: Remove nullable */ this[int index]
+        public ShellItem this[int index]
         {
             get
             {
-                return null;
+                return items[index];
                 //  //return ShellItem.Open(Items.ElementAt(index));
                 //var array = Items;
-                //try
-                //{
-                //    return array is null ? null : ShellItem.Open(array.GetItemAt((uint)index));
-                //}
-                //catch
-                //{
-                //    return null;
-                //}
-                //finally
-                //{
-                //    if (array != null)
-                //        Marshal.ReleaseComObject(array);
-                //}
+                //try { return array is null ? null : ShellItem.Open(array.GetItemAt((uint)index)); }
+                //catch { return null; }
+                //finally { if (array != null) Marshal.ReleaseComObject(array); }
             }
         }
 

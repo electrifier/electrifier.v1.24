@@ -63,7 +63,24 @@ public partial class ExplorerBrowser : UserControl, IWinUIExplorerBrowser
         GridViewItems = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
         TreeViewItems = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
 
-        // Add items to TreeViewItems and GridViewItems
-        //TreeViewItems.Add(new ShellItem(KNOWNFOLDERID.FOLDERID_Desktop));
+        NavigateTo(new ShellItem(@"c:\"));
+    }
+
+    public void NavigateTo(ShellItem shellItem)
+    {
+        if (shellItem is null)
+            throw new ArgumentNullException(nameof(shellItem));
+
+        // Add the item to the history
+        //History.Add(shellItem);
+
+        // Update the items in the TreeView and GridView
+        //TreeViewItems.Clear();
+        //GridViewItems.Clear();
+        //foreach (var item in shellItem.EnumerateItems(SHCONTF.SHCONTF_FOLDERS | SHCONTF.SHCONTF_NONFOLDERS))
+        //{
+        //    TreeViewItems.Add(item);
+        //    GridViewItems.Add(item);
+        //}
     }
 }
