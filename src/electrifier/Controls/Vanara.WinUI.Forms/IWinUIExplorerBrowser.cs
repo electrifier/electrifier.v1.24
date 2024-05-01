@@ -231,72 +231,6 @@ internal interface IWinUIExplorerBrowser
         }
     }
 
-    /// <summary>Represents a collection of <see cref="ShellItem"/> attached to an <see cref="ExplorerBrowser"/>.</summary>
-    public class ShellItemCollection : IReadOnlyList<ShellItem>
-    {
-        private readonly IWinUIExplorerBrowser eb;
-        private readonly SVGIO option;
-        private readonly List<ShellItem> items;
-
-        internal ShellItemCollection(IWinUIExplorerBrowser eb, SVGIO opt)
-        {
-            this.eb = eb;
-            option = opt;
-
-            items = new List<ShellItem>();
-            //items = eb.GetItemsArray(option);
-            // new List<IShellItem>() => eb.GetItemsArray(option);
-        }
-
-        /// <summary>Gets the number of elements in the collection.</summary>
-        /// <value>Returns a <see cref="int"/> value.</value>
-        public int Count => items.Count();
-
-        private List<ShellItem> /*ShellItemCollection */ Items => items;
-//                return items;
-//                //var array = eb.GetItemsArray(option);
-//                //try
-//                //{
-//                //    return array is null ? Enumerable.Empty<IShellItem>() : array;
-//                //}
-
-        /// <summary>Gets the <see cref="ShellItem"/> at the specified index.</summary>
-        /// <value>The <see cref="ShellItem"/>.</value>
-        /// <param name="index">The zero-based index of the element to get.</param>
-        public ShellItem? /* TODO: Remove nullable */ this[int index]
-        {
-            get
-            {
-                return null; 
-                //  //return ShellItem.Open(Items.ElementAt(index));
-                //var array = Items;
-                //try
-                //{
-                //    return array is null ? null : ShellItem.Open(array.GetItemAt((uint)index));
-                //}
-                //catch
-                //{
-                //    return null;
-                //}
-                //finally
-                //{
-                //    if (array != null)
-                //        Marshal.ReleaseComObject(array);
-                //}
-            }
-        }
-
-        /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        public IEnumerator<ShellItem> GetEnumerator()
-            //=> Items.Select(ShellItem.Open).GetEnumerator();
-            => items.GetEnumerator();
-
-        /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    }
-
     /// <summary>The event argument for NavigationLogChangedEvent</summary>
     public class NavigationLogEventArgs : EventArgs
     {
@@ -353,5 +287,70 @@ internal interface IWinUIExplorerBrowser
         {
             get; set;
         }
+    }
+
+    /// <summary>Represents a collection of <see cref="ShellItem"/> attached to an <see cref="ExplorerBrowser"/>.</summary>
+    public class ShellItemCollection : IReadOnlyList<ShellItem>
+    {
+        private readonly IWinUIExplorerBrowser eb;
+        private readonly SVGIO option;
+        private readonly List<ShellItem> items;
+
+        internal ShellItemCollection(IWinUIExplorerBrowser eb, SVGIO opt)
+        {
+            this.eb = eb;
+            option = opt;
+
+            items = new List<ShellItem>();
+            // new List<IShellItem>() => eb.GetItemsArray(option);
+        }
+
+        /// <summary>Gets the number of elements in the collection.</summary>
+        /// <value>Returns a <see cref="int"/> value.</value>
+        public int Count => items.Count();
+
+        private List<ShellItem> /*ShellItemCollection */ Items => items;
+        //return items;
+        ////var array = eb.GetItemsArray(option);
+        ////try
+        ////{
+        ////    return array is null ? Enumerable.Empty<IShellItem>() : array;
+        ////}
+
+        /// <summary>Gets the <see cref="ShellItem"/> at the specified index.</summary>
+        /// <value>The <see cref="ShellItem"/>.</value>
+        /// <param name="index">The zero-based index of the element to get.</param>
+        public ShellItem? /* TODO: Remove nullable */ this[int index]
+        {
+            get
+            {
+                return null;
+                //  //return ShellItem.Open(Items.ElementAt(index));
+                //var array = Items;
+                //try
+                //{
+                //    return array is null ? null : ShellItem.Open(array.GetItemAt((uint)index));
+                //}
+                //catch
+                //{
+                //    return null;
+                //}
+                //finally
+                //{
+                //    if (array != null)
+                //        Marshal.ReleaseComObject(array);
+                //}
+            }
+        }
+
+        /// <summary>Returns an enumerator that iterates through the collection.</summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        public IEnumerator<ShellItem> GetEnumerator()
+            //=> Items.Select(ShellItem.Open).GetEnumerator();
+            => items.GetEnumerator();
+
+        /// <summary>Returns an enumerator that iterates through the collection.</summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
 }
