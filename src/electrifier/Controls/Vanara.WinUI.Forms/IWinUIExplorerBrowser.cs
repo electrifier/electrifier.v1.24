@@ -11,9 +11,9 @@ using static Vanara.PInvoke.Shell32;
 namespace electrifier.Controls.Vanara.WinUI.Forms;
 
 /// <summary>
-/// Interface for the ExplorerBrowser control.
+/// Interface for the <see cref="ExplorerBrowser"/> control.
 /// 
-/// It is a clone of interface <a href="https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/nn-shobjidl_core-iexplorerbrowser">IWinUIExplorerBrowser</a>.
+/// It is a clone of <a href="https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/nn-shobjidl_core-iexplorerbrowser">IExplorerBrowser</a>.
 /// </summary>
 internal interface IWinUIExplorerBrowser
 {
@@ -44,7 +44,7 @@ internal interface IWinUIExplorerBrowser
             }
         }
 
-        private readonly ExplorerBrowser? parent;
+        private readonly ExplorerBrowser parent;
 
         //
         // Summary:
@@ -100,9 +100,9 @@ internal interface IWinUIExplorerBrowser
 
         internal NavigationLog(IWinUIExplorerBrowser parent)
         {
-            this.parent = (ExplorerBrowser?)(parent ?? throw new ArgumentNullException("parent"));
-            // TODO:            this.parent.Navigated += OnNavigated;
-            // TODO:            this.parent.NavigationFailed += OnNavigationFailed;
+            this.parent = (ExplorerBrowser)(parent ?? throw new ArgumentNullException("parent"));
+            //this.parent.Navigated += OnNavigated;
+            //this.parent.NavigationFailed += OnNavigationFailed;
         }
 
         //
@@ -309,39 +309,17 @@ internal interface IWinUIExplorerBrowser
         /// <value>Returns a <see cref="int"/> value.</value>
         public int Count => items.Count();
 
-        private List<ShellItem> /*ShellItemCollection */ Items => items;
-        //return items;
-        ////var array = eb.GetItemsArray(option);
-        ////try
-        ////{
-        ////    return array is null ? Enumerable.Empty<IShellItem>() : array;
-        ////}
+        private /*ShellItemCollection */ List<ShellItem> Items => items;
+        //var array = eb.GetItemsArray(option);
+        //try
+        //{
+        //    return array is null ? Enumerable.Empty<IShellItem>() : array;
+        //}
 
         /// <summary>Gets the <see cref="ShellItem"/> at the specified index.</summary>
         /// <value>The <see cref="ShellItem"/>.</value>
         /// <param name="index">The zero-based index of the element to get.</param>
-        public ShellItem? /* TODO: Remove nullable */ this[int index]
-        {
-            get
-            {
-                return null;
-                //  //return ShellItem.Open(Items.ElementAt(index));
-                //var array = Items;
-                //try
-                //{
-                //    return array is null ? null : ShellItem.Open(array.GetItemAt((uint)index));
-                //}
-                //catch
-                //{
-                //    return null;
-                //}
-                //finally
-                //{
-                //    if (array != null)
-                //        Marshal.ReleaseComObject(array);
-                //}
-            }
-        }
+        public ShellItem this[int index] => items[index];
 
         /// <summary>Returns an enumerator that iterates through the collection.</summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
