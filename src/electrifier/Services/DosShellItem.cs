@@ -1,64 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Imaging;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Media.Imaging;
-using Windows.Storage;
+using Windows.Foundation.Metadata;
 using Windows.Storage.FileProperties;
 using Windows.Storage.Search;
+using Windows.Storage;
 
 namespace electrifier.Services;
-
-/**
- * 
- * https://learn.microsoft.com/en-us/uwp/api/windows.storage.search.commonfolderquery?view=winrt-22621
- * 
- */
-
-#region DosShellItemFactory
-// TODO: Implement DosShellItemFactory
-//public class DosShellItemFactory
-
-
-//public class NewShellItemImplementation : INotifyPropertyChanged
-//{
-//    public ObservableCollection<NewShellItemImplementation> Data
-//    {
-//        get; set;
-//    }
-//    // Static async method acting as a constructor
-//    public static async Task<NewShellItemImplementation> BuildViewModelAsync()
-//    {
-//        ObservableCollection<NewShellItemImplementation> tmpData = await GetDataTask();
-//        return new NewShellItemImplementation(tmpData);
-//    }
-//    // Private constructor called by the async method
-//    private NewShellItemImplementation(ObservableCollection<NewShellItemImplementation> data)
-//    {
-//        Data = data;
-//    }
-//    private static async Task<ObservableCollection<NewShellItemImplementation>> GetDataTask()
-//    {
-//        return new ObservableCollection<NewShellItemImplementation>
-//        {
-//            new(),
-//            //new("Item 1"),
-//            //new("Item 2"),
-//            //new("Item 3"),
-//            //new("Item 4"),
-//            //new("Item 36"),
-//            //new("Item 37"),
-//            //new("Item 38"),
-//            //new("Item 39"),
-//            //new("Item 40"),
-//            //new("Item 41"),
-//            //new("Item 42"),
-//            //new("Item 43"),
-//            //new("Item 44"),
-//        };
-//    }
-//}
-#endregion
 
 public class DosShellItem : INotifyPropertyChanged
 {
