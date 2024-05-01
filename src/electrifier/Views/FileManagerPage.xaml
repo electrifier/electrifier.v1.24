@@ -24,6 +24,7 @@
       xmlns:viewmodels="using:electrifier.ViewModels"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:vanarawinui="using:electrifier.Controls.Vanara.WinUI.Forms"
       behaviors:NavigationViewHeaderBehavior.HeaderMode="Never"
       d:DataContext="{d:DesignInstance Type=viewmodels:FileManagerViewModel}"
       mc:Ignorable="d">
@@ -63,7 +64,8 @@
         </Grid>
         <Grid x:Name="ContentAreaGrid"
               x:Uid="ContentAreaGrid"
-              Grid.Row="1">
+              Grid.Row="1"
+              Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="600"
                                   MinWidth="76"
@@ -149,6 +151,14 @@
                       ItemTemplate="{StaticResource ShellGridViewItemTemplate}"
                       SelectionMode="Extended" />
         </Grid>
+
+        <Grid x:Name="ExplorerBrowserGrid"
+              Grid.Row="1">
+            <vanarawinui:ExplorerBrowser x:Name="ExplorerBrowser"
+                                         HorizontalAlignment="Stretch"
+                                         VerticalAlignment="Stretch" />
+        </Grid>
+
         <CommandBar x:Name="BottomStatusCommandBar"
                     Grid.Row="2"
                     Background="Transparent"
