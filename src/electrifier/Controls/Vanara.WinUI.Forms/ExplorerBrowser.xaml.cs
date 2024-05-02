@@ -18,8 +18,7 @@ using Vanara.InteropServices;
 using Vanara.PInvoke;
 using Vanara.Windows.Forms.Design;
 using Vanara.Windows.Shell;
-using Windows.Foundation.Collections;
-using Windows.Foundation;
+
 using static electrifier.Controls.Vanara.WinUI.Forms.IWinUIExplorerBrowser;
 using static Vanara.PInvoke.Shell32;
 
@@ -54,33 +53,52 @@ public partial class ExplorerBrowser : UserControl, IWinUIExplorerBrowser
         get;
     }
 
+    private readonly ShellItem m_CurrentFolder;
+
+    public ShellItem CurrentFolder
+    {
+        get => m_CurrentFolder;
+        private set => PrepareNavigation(value);
+    }
+
     public ExplorerBrowser()
     {
         InitializeComponent();
+
+        m_CurrentFolder = new ShellItem(@"C:\");
 
         History = new IWinUIExplorerBrowser.NavigationLog(this);
         Items = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
         GridViewItems = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
         TreeViewItems = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
-
-        NavigateTo(new ShellItem(@"c:\"));
     }
 
+    /// <summary>
+    /// Prepare the Navigation for the specified folder.
+    /// </summary>
+    /// <param name="shellItem">The folder to prepare Navigation for</param>
+    /// <exception cref="ArgumentNullException">shellItem is null</exception>
+    private void PrepareNavigation(ShellItem shellItem)
+    {
+        if (shellItem is not null)
+        {
+            CurrentFolder = shellItem;
+
+            // Items.Clear();
+            // Items.AddRange(shellItem.GetChildren(SHCONTF.SHCONTF_FOLDERS | SHCONTF.SHCONTF_NONFOLDERS));
+        }
+        else
+        {
+            throw new ArgumentNullException(nameof(shellItem));
+        }
+    }
+
+    /// <summary>
+    /// Let ExplorerBrowser navigate to the specified folder.
+    /// </summary>
+    /// <param name="shellItem">Folder to navigate to</param>
     public void NavigateTo(ShellItem shellItem)
     {
-        if (shellItem is null)
-            throw new ArgumentNullException(nameof(shellItem));
-
-        // Add the item to the history
-        //History.Add(shellItem);
-
-        // Update the items in the TreeView and GridView
-        //TreeViewItems.Clear();
-        //GridViewItems.Clear();
-        //foreach (var item in shellItem.EnumerateItems(SHCONTF.SHCONTF_FOLDERS | SHCONTF.SHCONTF_NONFOLDERS))
-        //{
-        //    TreeViewItems.Add(item);
-        //    GridViewItems.Add(item);
-        //}
+        PrepareNavigation(shellItem);
     }
 }

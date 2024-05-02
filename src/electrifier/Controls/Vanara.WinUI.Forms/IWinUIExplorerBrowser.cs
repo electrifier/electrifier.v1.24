@@ -17,9 +17,7 @@ namespace electrifier.Controls.Vanara.WinUI.Forms;
 /// </summary>
 internal interface IWinUIExplorerBrowser
 {
-    //
-    // Summary:
-    //     The navigation log is a history of the locations visited by the explorer browser.
+    /// <summary>The navigation log is a history of the locations visited by the explorer browser</summary>
     public class NavigationLog
     {
         //
@@ -168,7 +166,7 @@ internal interface IWinUIExplorerBrowser
                 return false;
             }
 
-            ShellItem shellItem = Locations[index];
+            var shellItem = Locations[index];
             pendingNavigation = new PendingNavigation(shellItem, index);
             // TODO:            parent?.Navigate(shellItem);
             return true;
