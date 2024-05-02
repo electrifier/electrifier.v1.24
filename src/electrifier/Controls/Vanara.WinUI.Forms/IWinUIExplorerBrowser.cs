@@ -16,12 +16,10 @@ namespace electrifier.Controls.Vanara.WinUI.Forms;
 /// </summary>
 internal interface IWinUIExplorerBrowser
 {
-    /// <summary>The navigation log is a history of the locations visited by the explorer browser</summary>
+    /// <summary>The navigation log is a history of the locations visited by the <see cref="ExplorerBrowser"/>.</summary>
     public class NavigationLog
     {
-        //
-        // Summary:
-        //     A navigation traversal request
+        /// <summary>A navigation traversal request.</summary>
         private class PendingNavigation
         {
             internal int Index
@@ -43,27 +41,16 @@ internal interface IWinUIExplorerBrowser
 
         private readonly ExplorerBrowser parent;
 
-        //
-        // Summary:
-        //     The pending navigation log action. null if the user is not navigating via the
-        //     navigation log.
+        // <summary>The pending navigation log action. null if the user is not navigating via the navigation log.</summary>
         private PendingNavigation? pendingNavigation;
 
-        //
-        // Summary:
-        //     Indicates the presence of locations in the log that can be reached by calling
-        //     Navigate(Backward)
+        /// <summary>Indicates the presence of locations in the log that can be reached by calling Navigate(Backward).</summary>
         public bool CanNavigateBackward => CurrentLocationIndex > 0;
 
-        //
-        // Summary:
-        //     Indicates the presence of locations in the log that can be reached by calling
-        //     Navigate(Forward)
+        // <summary>Indicates the presence of locations in the log that can be reached by calling Navigate(Forward).</summary>
         public bool CanNavigateForward => CurrentLocationIndex < Locations.Count - 1;
 
-        //
-        // Summary:
-        //     Gets the shell object in the Locations collection pointed to by CurrentLocationIndex.
+        // <summary>Gets the shell object in the Locations collection pointed to by CurrentLocationIndex.</summary>
         public ShellItem? CurrentLocation
         {
             get
@@ -77,16 +64,16 @@ internal interface IWinUIExplorerBrowser
             }
         }
 
-        //
-        // Summary:
-        //     An index into the Locations collection. The ShellItem pointed to by this index
-        //     is the current location of the ExplorerBrowser.
+        // <summary>Gets or sets the current location index, an index into the Locations collection.
+        // The ShellItem pointed to by this index is the current location of the ExplorerBrowser.
+        // <value>The current location index.</value>
+        // <remarks>Setting this property will cause the <see cref="NavigationLogChanged"/> event to fire.</remarks>
+        // </summary>
         public int CurrentLocationIndex { get; set; } = -1;
+        
 
 
-        //
-        // Summary:
-        //     The navigation log
+        // <summary>The navigation log</summary>
         public List<ShellItem> Locations { get; } = new List<ShellItem>();
 
 

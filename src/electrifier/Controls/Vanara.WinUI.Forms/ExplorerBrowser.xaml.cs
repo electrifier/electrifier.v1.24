@@ -82,13 +82,17 @@ public partial class ExplorerBrowser : UserControl, IWinUIExplorerBrowser
     private void PrepareNavigation(ShellItem shellItem)
     {
         var navigationTarget = shellItem ?? throw new ArgumentNullException(nameof(shellItem));
+        var targetPath = navigationTarget.ParsingName;
+
+        if (targetPath != null)
+        {
+            //targetPath = Path.Combine(targetPath, "*");
+        }
+
 
         // TODO: implement navigation history
         // TODO: Lock member variables to prevent reentrancy
-        //finally
-        //{
-        //    //m_CurrentFolder = new_CurrentFolder;
-        //}
+        //finally { m_CurrentFolder = new_CurrentFolder; }
 
         try
         {
