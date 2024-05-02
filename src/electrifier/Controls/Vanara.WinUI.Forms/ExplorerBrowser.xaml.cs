@@ -34,6 +34,9 @@ using static Vanara.PInvoke.Shell32;
 
 namespace electrifier.Controls.Vanara.WinUI.Forms;
 
+/// <summary>
+/// ExplorerBrowser is a WinUI UserControl that displays a Windows Explorer-like view of the file system.
+/// </summary>
 public partial class ExplorerBrowser : UserControl, IWinUIExplorerBrowser
 {
     private IWinUIExplorerBrowser.NavigationLog History
@@ -73,32 +76,31 @@ public partial class ExplorerBrowser : UserControl, IWinUIExplorerBrowser
         TreeViewItems = new ShellItemCollection(this, SVGIO.SVGIO_ALLVIEW);
     }
 
-    /// <summary>
-    /// Prepare the Navigation for the specified folder.
-    /// </summary>
+    /// <summary>Prepare Navigation for the specified folder.</summary>
     /// <param name="shellItem">The folder to prepare Navigation for</param>
     /// <exception cref="ArgumentNullException">shellItem is null</exception>
     private void PrepareNavigation(ShellItem shellItem)
     {
-        if (shellItem is not null)
-        {
-            CurrentFolder = shellItem;
+        var navigationTarget = shellItem ?? throw new ArgumentNullException(nameof(shellItem));
+//        var new_CurrentFolder = navigationTarget;
 
+        try
+        {
+            // TODO: build item arrays temporarily, finally assign them to the Items property
             // Items.Clear();
             // Items.AddRange(shellItem.GetChildren(SHCONTF.SHCONTF_FOLDERS | SHCONTF.SHCONTF_NONFOLDERS));
         }
-        else
+        catch
         {
-            throw new ArgumentNullException(nameof(shellItem));
         }
     }
 
-    /// <summary>
-    /// Let ExplorerBrowser navigate to the specified folder.
-    /// </summary>
+    /// <summary>Let ExplorerBrowser navigate to the specified folder.</summary>
     /// <param name="shellItem">Folder to navigate to</param>
-    public void NavigateTo(ShellItem shellItem)
+    /* TODO: was public void NavigateTo(ShellItem shellItem) */
+    internal void NavigateTo(ShellItem shellItem)
     {
+        // Todo: if shellItem is a file, trigger event to open the file with the caller's default application
         PrepareNavigation(shellItem);
     }
 }
