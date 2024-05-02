@@ -82,23 +82,31 @@ public partial class ExplorerBrowser : UserControl, IWinUIExplorerBrowser
     private void PrepareNavigation(ShellItem shellItem)
     {
         var navigationTarget = shellItem ?? throw new ArgumentNullException(nameof(shellItem));
-//        var new_CurrentFolder = navigationTarget;
+
+        // TODO: implement navigation history
+        // TODO: Lock member variables to prevent reentrancy
+        //finally
+        //{
+        //    //m_CurrentFolder = new_CurrentFolder;
+        //}
 
         try
         {
             // TODO: build item arrays temporarily, finally assign them to the Items property
-            // Items.Clear();
-            // Items.AddRange(shellItem.GetChildren(SHCONTF.SHCONTF_FOLDERS | SHCONTF.SHCONTF_NONFOLDERS));
+            //var targetItems = shellItem.GetChildren(SHCONTF.SHCONTF_FOLDERS | SHCONTF.SHCONTF_NONFOLDERS);
+
+            //Items.Clear();
+            //Items.AddRange(shellItem.GetChildren(SHCONTF.SHCONTF_FOLDERS | SHCONTF.SHCONTF_NONFOLDERS));
         }
         catch
         {
+            throw;
         }
     }
 
     /// <summary>Let ExplorerBrowser navigate to the specified folder.</summary>
     /// <param name="shellItem">Folder to navigate to</param>
-    /* TODO: was public void NavigateTo(ShellItem shellItem) */
-    internal void NavigateTo(ShellItem shellItem)
+    internal void NavigateTo(ShellItem shellItem)     /* Info, was: public void NavigateTo(ShellItem shellItem) */
     {
         // Todo: if shellItem is a file, trigger event to open the file with the caller's default application
         PrepareNavigation(shellItem);

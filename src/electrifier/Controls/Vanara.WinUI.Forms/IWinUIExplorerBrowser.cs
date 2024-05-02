@@ -11,9 +11,8 @@ using static Vanara.PInvoke.Shell32;
 namespace electrifier.Controls.Vanara.WinUI.Forms;
 
 /// <summary>
-/// Interface for the <see cref="ExplorerBrowser"/> control.
-/// 
-/// It is a clone of <a href="https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/nn-shobjidl_core-iexplorerbrowser">IExplorerBrowser</a>.
+/// Interface for the (WinUI3 based) <see cref="ExplorerBrowser"/> control.
+/// It is a clone of <a href="https://learn.microsoft.com/en-us/windows/win32/api/shobjidl_core/nn-shobjidl_core-iexplorerbrowser">Win32API - ExplorerBrowser</a>.
 /// </summary>
 internal interface IWinUIExplorerBrowser
 {
