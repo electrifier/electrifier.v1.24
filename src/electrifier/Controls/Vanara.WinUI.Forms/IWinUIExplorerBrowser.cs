@@ -84,7 +84,7 @@ internal interface IWinUIExplorerBrowser
 
         internal NavigationLog(IWinUIExplorerBrowser parent)
         {
-            this.parent = (ExplorerBrowser)(parent ?? throw new ArgumentNullException("parent"));
+            this.parent = (ExplorerBrowser)(parent ?? throw new ArgumentNullException(nameof(parent)));
             //this.parent.Navigated += OnNavigated;
             //this.parent.NavigationFailed += OnNavigationFailed;
         }
@@ -100,13 +100,13 @@ internal interface IWinUIExplorerBrowser
                 var canNavigateForward = CanNavigateForward;
                 Locations.Clear();
                 CurrentLocationIndex = -1;
-                NavigationLogEventArgs e = new NavigationLogEventArgs
+                var e = new NavigationLogEventArgs
                 {
                     LocationsChanged = true,
                     CanNavigateBackwardChanged = (canNavigateBackward != CanNavigateBackward),
                     CanNavigateForwardChanged = (canNavigateForward != CanNavigateForward)
                 };
-                this.NavigationLogChanged?.Invoke(this, e);
+                NavigationLogChanged?.Invoke(this, e);
             }
         }
 
@@ -132,7 +132,7 @@ internal interface IWinUIExplorerBrowser
                 index = CurrentLocationIndex + 1;
             }
 
-            ShellItem shellItem = Locations[index];
+            var shellItem = Locations[index];
             pendingNavigation = new PendingNavigation(shellItem, index);
             parent.NavigateTo(shellItem);
             return true;
@@ -160,7 +160,7 @@ internal interface IWinUIExplorerBrowser
 
         private void OnNavigated(object? sender, NavigatedEventArgs args)
         {
-            NavigationLogEventArgs navigationLogEventArgs = new NavigationLogEventArgs();
+            var navigationLogEventArgs = new NavigationLogEventArgs();
             var canNavigateBackward = CanNavigateBackward;
             var canNavigateForward = CanNavigateForward;
             if (pendingNavigation != null)
@@ -206,7 +206,7 @@ internal interface IWinUIExplorerBrowser
 
             navigationLogEventArgs.CanNavigateBackwardChanged = canNavigateBackward != CanNavigateBackward;
             navigationLogEventArgs.CanNavigateForwardChanged = canNavigateForward != CanNavigateForward;
-            this.NavigationLogChanged?.Invoke(this, navigationLogEventArgs);
+            NavigationLogChanged?.Invoke(this, navigationLogEventArgs);
         }
 
         private void OnNavigationFailed(object? sender, /* Vanara.WinUI.Forms.ExplorerBrowser. */ NavigationFailedEventArgs args)
