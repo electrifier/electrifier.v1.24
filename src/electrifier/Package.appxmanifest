@@ -16,7 +16,7 @@
   <Identity
     Name="110d64de-2f36-46a7-816c-1f138a578b9d"
     Publisher="CN=electrifier.org"
-    Version="1.24.421.0" />
+    Version="1.24.504.0" />
     
   <mp:PhoneIdentity PhoneProductId="110d64de-2f36-46a7-816c-1f138a578b9d" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
     
